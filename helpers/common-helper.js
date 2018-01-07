@@ -6,8 +6,8 @@ module.exports = function() {
             var username = email.substring(0, email.lastIndexOf("@"));
             return username.replace(/_/g, '-').toLowerCase();
         },
-        getNameFromUsername : function(username) {
-            return _.upperFirst(username);
+        ucFirst : function(word) {
+            return _.upperFirst(word);
         }
     }
 };
