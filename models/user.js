@@ -41,12 +41,6 @@ UserSchema.pre('save', function(next) {
     }
 });
 
-// encrypts the given password
-UserSchema.methods.setPassword = function(password) {
-    var salt = bcrypt.genSaltSync(10);
-    this.password = bcrypt.hashSync(password, salt);
-};
-
 UserSchema.methods.validatePassword = function(password) {
     return bcrypt.compareSync(password, this.password);
 };
