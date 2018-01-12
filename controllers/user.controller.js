@@ -32,9 +32,9 @@ exports.register = function (req, res) {
  * Authenticate user
  */
 exports.authenticate = function (req, res) {
-    var username = req.body.username,
+    var username = req.body.email,
         password = req.body.password,
-        query = {username : username};
+        query = {email : email};
 
     User.findOne(query, function(err, user) {
         if (err) throw err;

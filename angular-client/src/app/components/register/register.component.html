@@ -1,3 +1,17 @@
-<p>
-  register works!
-</p>
+<h2>Register</h2>
+<form (submit)="onRegisterSubmit()"  [formGroup]="registerForm">
+  <div class="form-group" [ngClass]="displayFieldCss('email')">
+    <label>Email</label>
+    <input type="text" [(ngModel)]="email" name="email" class="form-control" formControlName="email" />
+
+    <app-field-error-display [displayError]="isFieldValid('email')" errorMsg="Please enter valid email"></app-field-error-display>
+  </div>
+  <div class="form-group" [ngClass]="displayFieldCss('password')">
+    <label>Password</label>
+    <input type="text" [(ngModel)]="password" name="password" class="form-control" formControlName="password" />
+    <app-field-error-display [displayError]="isFieldValid('password')" errorMsg="Password is required"></app-field-error-display>
+  </div>
+  <button type="submit" class="btn btn-primary" [disabled]="!registerForm.valid">
+    Submit
+  </button>
+</form>
