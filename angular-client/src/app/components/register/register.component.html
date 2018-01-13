@@ -2,7 +2,7 @@
 <form (submit)="onRegisterSubmit()"  [formGroup]="registerForm">
   <div class="form-group" [ngClass]="displayFieldCss('email')">
     <label>Email</label>
-    <input type="text" [(ngModel)]="email" name="email" class="form-control" formControlName="email" />
+    <input type="text" [(ngModel)]="email" name="email" class="form-control" formControlName="email" autofocus/>
 
     <app-field-error-display [displayError]="isFieldValid('email')" errorMsg="Please enter valid email"></app-field-error-display>
   </div>

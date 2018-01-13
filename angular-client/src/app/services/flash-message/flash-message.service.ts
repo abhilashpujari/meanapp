@@ -1,31 +1,32 @@
 import { Injectable } from '@angular/core';
-import { ToastrService, ToastConfig } from 'ngx-toastr';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable()
-export class NotificationService {
+export class FlashMessageService {
 
   constructor(private toastrService: ToastrService) { }
 
-  success(title : string, message: string) {
+  success(title : string, message: any) {
     this.displayToast(title, message, 'success');
   }
 
-  error(title : string, message: string) {
+  error(title : string, message: any) {
     this.displayToast(title, message, 'error');
   }
 
-  info(title : string, message: string) {
+  info(title : string, message: any) {
     this.displayToast(title, message, 'info');
   }
 
-  warning(title : string, message: string) {
+  warning(title : string, message: any) {
     this.displayToast(title, message, 'warning');
   }
 
-  private displayToast(title : string, message: string, type: string) {
-    var timeout = 5000;
+  private displayToast(title : string, message: any, type: string) {
+    var timeout = 5000,
+        message = message || '';
 
-    var toastOptions: ToastConfig = {
+    var toastOptions = {
       closeButton: true,
       timeout: timeout,
     };

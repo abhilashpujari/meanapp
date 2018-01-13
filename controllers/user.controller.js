@@ -19,14 +19,19 @@ exports.register = function (req, res) {
     user.name = commonHelper.ucFirst(user.username);
 
     user.save(function(err, user) {
-        if (err) throw err;
-
-        res.send({
-            success  : true,
-            message : 'User created Successfully'
-        });
+        if (err) {
+            res.json({
+                success  : false,
+                message : 'Failed to register user'
+            });
+        } else {
+            res.json({
+                success  : true,
+                message : 'User registered successfully'
+            });
+        }
     });
-};
+}
 
 /**
  * Authenticate user
@@ -49,7 +54,7 @@ exports.authenticate = function (req, res) {
                     }
                 );
 
-                res.send({
+                res.json({
                     success : true,
                     token : token,
                     user : {
@@ -60,28 +65,28 @@ exports.authenticate = function (req, res) {
                     }
                 });
             } else {
-                res.send({
+                res.json({
                     success : false,
                     message : 'Invalid password'
                 });
             }
         } else {
-            res.send({
+            res.json({
                 success : false,
                 message : 'Invalid User'
             });
         }
     });
-};
+}
 
 /**
  * Get User Profile
  */
 exports.profile = function (req, res) {
-    res.send({
+    res.json({
         'id' : req.user.id,
         'username' : req.user.username,
         'name' : req.user.name,
         'email' : req.user.email
     });
-};
+}
