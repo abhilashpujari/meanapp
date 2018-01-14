@@ -38,10 +38,7 @@ export class RegisterComponent implements OnInit {
     }
 
     isFieldValid(field:string) {
-        return (
-            (!this.registerForm.get(field).valid && this.registerForm.get(field).touched) ||
-            (this.registerForm.get(field).untouched)
-        );
+        return ((!this.registerForm.get(field).valid && this.registerForm.get(field).touched));
     }
 
     displayFieldCss(field:string) {
@@ -62,10 +59,10 @@ export class RegisterComponent implements OnInit {
             // Register user
             this.authService.registerUser(user).subscribe(data => {
                 if (data.success) {
-                    this.flashMessageService.success(data.message, '');
+                    this.flashMessageService.success('', data.message);
                     this.router.navigate(['/login']);
                 } else {
-                    this.flashMessageService.error(data.message, '');
+                    this.flashMessageService.error('', data.message);
                     this.router.navigate(['/register']);
                 }
             });

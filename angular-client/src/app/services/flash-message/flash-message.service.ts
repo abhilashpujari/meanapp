@@ -24,8 +24,7 @@ export class FlashMessageService {
     }
 
     private displayToast(title:string, message:any, type:string) {
-        var timeout = 5000,
-            message = message || '';
+        var timeout = 5000;
 
         var toastOptions = {
             closeButton: true,
