@@ -1,17 +1,19 @@
-<h2>Register</h2>
-<form (submit)="onRegisterSubmit()"  [formGroup]="registerForm">
-  <div class="form-group" [ngClass]="displayFieldCss('email')">
-    <label>Email</label>
-    <input type="text" [(ngModel)]="email" name="email" class="form-control" formControlName="email" autofocus/>
+<div class="register">
+    <h2 class="register__title text-center">Register</h2>
+    <form class="register__form" (submit)="onRegisterSubmit()"  [formGroup]="registerForm">
+        <div class="form-group" [ngClass]="displayFieldCss('email')">
+          <label>Email</label>
+          <input type="text" [(ngModel)]="email" name="email" class="form-control" formControlName="email" autofocus/>
 
-    <app-field-error-display [displayError]="isFieldValid('email')" errorMsg="Please enter valid email"></app-field-error-display>
-  </div>
-  <div class="form-group" [ngClass]="displayFieldCss('password')">
-    <label>Password</label>
-    <input type="text" [(ngModel)]="password" name="password" class="form-control" formControlName="password" />
-    <app-field-error-display [displayError]="isFieldValid('password')" errorMsg="Password is required"></app-field-error-display>
-  </div>
-  <button type="submit" class="btn btn-primary" [disabled]="!registerForm.valid">
-    Submit
-  </button>
-</form>
+          <app-field-error-display [displayError]="isFieldValid('email')" errorMsg="Please enter valid email"></app-field-error-display>
+        </div>
+        <div class="form-group" [ngClass]="displayFieldCss('password')">
+          <label>Password</label>
+          <input type="text" [(ngModel)]="password" name="password" class="form-control" formControlName="password" />
+          <app-field-error-display [displayError]="isFieldValid('password')" errorMsg="Password is required"></app-field-error-display>
+        </div>
+        <button type="submit" class="btn btn-primary btn-register" [disabled]="!registerForm.valid">
+          Register
+        </button>
+    </form>
+</div>
