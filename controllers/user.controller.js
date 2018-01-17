@@ -5,6 +5,7 @@ const User = require('../models/user');
 const router = express.Router();
 const jwtConfig = require('../config/jwt');
 const commonHelper = require("../helpers/common-helper")();
+const moment = require('moment');
 
 /**
  * Create an user
@@ -37,9 +38,10 @@ exports.register = function (req, res) {
  * Authenticate user
  */
 exports.authenticate = function (req, res) {
-    var username = req.body.email,
+    var email = req.body.email,
         password = req.body.password,
-        query = {email : email};
+        query = {email : email},
+        tokenExpiry = 604800 /* 1 week */;
 
     User.findOne(query, function(err, user) {
         if (err) throw err;
@@ -50,7 +52,7 @@ exports.authenticate = function (req, res) {
                     {data : user}, 
                     jwtConfig.jwtSecret, 
                     {
-                        expiresIn: 604800  /* 1 week */
+                        expiresIn: tokenExpiry  
                     }
                 );
 
@@ -61,7 +63,8 @@ exports.authenticate = function (req, res) {
                         id : user._id,
                         name : user.name,
                         username : user.username,
-                        email : user.email
+                        email : user.email,
+                        expiresIn : moment().add(tokenExpiry,'second')
                     }
                 });
             } else {

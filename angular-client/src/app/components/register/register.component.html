@@ -1,6 +1,6 @@
 <div class="register">
     <h2 class="register__title text-center">Register</h2>
-    <form class="register__form" (submit)="onRegisterSubmit()"  [formGroup]="registerForm">
+    <form class="register__form" (submit)="onRegisterSubmit()" [formGroup]="registerForm">
         <div class="form-group" [ngClass]="displayFieldCss('email')">
           <label>Email</label>
           <input type="text" [(ngModel)]="email" name="email" class="form-control" formControlName="email" autofocus/>
