@@ -10,7 +10,8 @@ const UserSchema = new Schema({
     email : {
         type: String,
         required : true,
-        unique: true
+        unique: true,
+        match: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i
     },
     username : {
         type: String,
@@ -28,11 +29,14 @@ const UserSchema = new Schema({
     updatedOn : {
         type: Date,
         default: Date.now
+    },
+    lastLogin : {
+        type: Date
     }
 });
 
 UserSchema.pre('save', function(next) {
-    if(this.password) {
+    if(this.password && this.isModified('password')) {
         var salt = bcrypt.genSaltSync(10);
         this.password = bcrypt.hashSync(this.password, salt);
         next();
