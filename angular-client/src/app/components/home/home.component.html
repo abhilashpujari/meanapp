@@ -4,10 +4,10 @@
   </h1>
   <p class="lead">Welcome to our app</p>
   <div>
-    <a class="btn btn-primary" [routerLink]="['/login']">
+    <a class="btn btn-primary" *ngIf="!authService.isLoggedIn()" [routerLink]="['/login']">
       Login
     </a>
-    <a class="btn btn-default" [routerLink]="['/register']">
+    <a class="btn btn-default" *ngIf="!authService.isLoggedIn()" [routerLink]="['/register']">
       Register
     </a>
   </div>

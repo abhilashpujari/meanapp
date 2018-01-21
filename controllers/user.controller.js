@@ -56,15 +56,19 @@ exports.authenticate = function (req, res) {
                     }
                 );
 
+                // Save the last login time
+                user.lastLogin = new Date();
+                user.save();
+
                 res.json({
                     success : true,
                     token : token,
+                    expiresIn : tokenExpiry,
                     user : {
                         id : user._id,
                         name : user.name,
                         username : user.username,
-                        email : user.email,
-                        expiresIn : moment().add(tokenExpiry,'second')
+                        email : user.email
                     }
                 });
             } else {

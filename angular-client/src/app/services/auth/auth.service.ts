@@ -28,30 +28,27 @@ export class AuthService {
   }
 
   setSession(authResult) {
+    var expiresIn = moment().add(authResult.expiresIn, 'seconds').unix();
+    
     localStorage.setItem('token', authResult.token);
     localStorage.setItem('user', authResult.user);
+    localStorage.setItem('expiresIn', JSON.stringify(expiresIn));
   }          
 
   logout() {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
+    localStorage.removeItem('expiresIn');
 
     this.authToken = this.user = null;
   }
 
-  public isLoggedIn() {
-    return moment().isBefore(this.getExpiration());
-  }
-
-  isLoggedOut() {
-      return !this.isLoggedIn();
+  isLoggedIn() {
+     return moment().isBefore(this.getExpiration());
   }
 
   getExpiration() {
-    const token = localStorage.getItem('token');
-    const decoded = decode(token);
-    const expiresAt = decoded.expiresIn;
-    
-    return moment(expiresAt);
-  } 
+    const expiresIn = JSON.parse(localStorage.getItem('expiresIn'));
+    return moment.unix(expiresIn).format();
+  }
 }
