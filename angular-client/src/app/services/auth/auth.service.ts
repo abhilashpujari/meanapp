@@ -5,6 +5,7 @@ import * as moment from "moment";
 import decode from 'jwt-decode';
 
 import 'rxjs/add/operator/map';
+import { environment } from '../../../environments/environment';
 
 @Injectable()
 export class AuthService {
@@ -17,14 +18,14 @@ export class AuthService {
       var headers = new Headers();
       headers.append('Content-Type', 'application/json');
 
-      return this.http.post('http://localhost:3000/api/v1.0/user/register', user, {headers : headers}).map(res => res.json());
+      return this.http.post(`${environment.apiEndpoint}/user/register`, user, {headers : headers}).map(res => res.json());
   }
 
   loginUser(user) {
     var headers = new Headers();
     headers.append('Content-Type', 'application/json');
 
-    return this.http.post('http://localhost:3000/api/v1.0/user/authenticate', user, {headers : headers}).map(res => res.json());
+    return this.http.post(`${environment.apiEndpoint}/user/authenticate`, user, {headers : headers}).map(res => res.json());
   }
 
   setSession(authResult) {
@@ -45,6 +46,10 @@ export class AuthService {
 
   isLoggedIn() {
      return moment().isBefore(this.getExpiration());
+  }
+
+  getAuthToken() {
+      return localStorage.getItem('token');
   }
 
   getExpiration() {

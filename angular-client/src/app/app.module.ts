@@ -19,7 +19,9 @@ import { FieldErrorDisplayComponent } from './components/field-error-display/fie
 /* Services */
 import { ValidatorService } from './services/validator/validator.service';
 import { AuthService } from './services/auth/auth.service';
+import { ProfileService } from './services/profile/profile.service';
 import { FlashMessageService } from './services/flash-message/flash-message.service';
+import { ProfileComponent } from './components/profile/profile.component';
 
 @NgModule({
     declarations: [
@@ -29,7 +31,8 @@ import { FlashMessageService } from './services/flash-message/flash-message.serv
         RegisterComponent,
         DashboardComponent,
         HeaderComponent,
-        FieldErrorDisplayComponent
+        FieldErrorDisplayComponent,
+        ProfileComponent
     ],
     imports: [
         HttpModule,
@@ -42,6 +45,7 @@ import { FlashMessageService } from './services/flash-message/flash-message.serv
     providers: [
         ValidatorService,
         AuthService,
+        ProfileService,
         FlashMessageService
     ],
     bootstrap: [AppComponent]
