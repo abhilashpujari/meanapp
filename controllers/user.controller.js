@@ -91,9 +91,12 @@ exports.authenticate = function (req, res) {
  */
 exports.profile = function (req, res) {
     res.json({
-        'id' : req.user.id,
-        'username' : req.user.username,
-        'name' : req.user.name,
-        'email' : req.user.email
+        success : true,
+        user  : {
+            'id' : req.user.id,
+            'username' : req.user.username,
+            'name' : req.user.name,
+            'email' : req.user.email
+        }
     });
 }

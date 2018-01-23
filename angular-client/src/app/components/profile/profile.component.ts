@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import {
   FormGroup,
@@ -23,15 +24,19 @@ export class ProfileComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
+    private router : Router,
     private flashMessageService: FlashMessageService,
     private profileService : ProfileService
   ) { }
 
   ngOnInit() {
+    if (!this.authService.isLoggedIn()) {
+      this.router.navigate(['/login']);
+    }
+
     this.profileService.getProfile().subscribe(data => {
-      this.user = 'Hello';
       if (data.success) {
-          //this.user = data.user;
+          this.user = data.user;
       } else {}
     });
   }
