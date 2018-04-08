@@ -23,7 +23,7 @@ To run Backend api
 ```
 cd meanapp
 npm install  
-npm start 
+npm run start 
 
 ```
 
